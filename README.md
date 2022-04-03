@@ -56,15 +56,21 @@ To see the releases supported versions please [click here](https://github.com/dm
 ## Tasks to do
 The tasks described below are linked to an issue that also appears in the section of projects of the present github project.
 What you see below is a resume of some of the issues opened but are not all of them, only the main functionalities.
+
+The nomenclature is the next one:
+
+:white_check_mark:: Done
+:x:: Not done yet
+
 For the sensors:
-- [x] MQ-3
-- [x] GPS
-- [ ] Push button lecture
-- [ ] Set both together
+- :white_check_mark: MQ-3
+- :white_check_mark: GPS
+- :x: Push button lecture
+- :x: Set both together
 
 For the MQTT
-- [ ] Send coordinates to google iot core MQTT
-- [ ] Add register to firebase
+- :x: Send coordinates to google iot core MQTT
+- :x: Add register to firebase
 
 ### Personal notes
 * [Para el certificado ssl con c++](http://blog.espol.edu.ec/girni/mqtt-tls-archivo-ino-para-mensajes-de-estado-led/)
