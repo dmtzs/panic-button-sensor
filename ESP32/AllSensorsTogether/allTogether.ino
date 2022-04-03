@@ -5,9 +5,9 @@
 // Biblioteca que se debe de instalar
 #include <WifiLocation.h>
 
-const char* googleApiKey = "AIzaSyBgcSZMRzZZS-fBlkFQGqYY4eqg46XSWM8";
-const char* ssid = "Asus 2.4";
-const char* passwd = "M_on_ky_3";
+const char* googleApiKey = "Api key";
+const char* ssid = "...";
+const char* passwd = "...";
 
 WifiLocation location (googleApiKey);
 
