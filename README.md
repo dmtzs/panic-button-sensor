@@ -34,7 +34,7 @@ I´m developing a github page in the wiki part in order to use that space as a d
 Also please see below the list of the hardware which are going to be used in this project.
 
 ## Supported versions for releases
-To see the releases supported versions please [click here]() to see the supported ones and unsupported ones.
+To see the releases supported versions please [click here](https://github.com/dmtzs/panic-button-sensor/blob/master/SECURITY.md) to see the supported ones and unsupported ones.
 ## ESP32-program
 ### Specifications
 
