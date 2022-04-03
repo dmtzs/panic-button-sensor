@@ -58,7 +58,8 @@ The tasks described below are linked to an issue that also appears in the sectio
 What you see below is a resume of some of the issues opened but are not all of them, only the main functionalities.
 For the sensors:
 - [x] MQ-3
-- [ ] GPS
+- [x] GPS
+- [ ] Push button lecture
 - [ ] Set both together
 
 For the MQTT
@@ -69,3 +70,7 @@ For the MQTT
 * [Para el certificado ssl con c++](http://blog.espol.edu.ec/girni/mqtt-tls-archivo-ino-para-mensajes-de-estado-led/)
 * [Enlace google iot core(este es el bueno)](https://www.survivingwithandroid.com/cloud-iot-core-esp32/)
 * [Este segundo enlace es para el sensor de gps bueno](https://blog.asksensors.com/iot-cloud-based-gps-tracking-esp32-gps-neo-6m-module/)
+
+* [Instructivo de la api de geolocalizacion](https://developers.google.com/maps/documentation/geolocation/cloud-setup)
+* [Github para instructivo de Wifi Location](https://github.com/gmag11/WifiLocation)
+* [Decodificaion y codificacion de base 64 para Esp32](https://pcbartists.com/firmware/base64-encoding-and-decoding-on-esp32/)
