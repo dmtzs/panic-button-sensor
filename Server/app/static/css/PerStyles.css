@@ -1,1 +1,16 @@
 /*Your css code here*/
+.container{
+    text-align:center;
+}
+
+.anchors{
+    margin: 0;
+    padding: 0;
+    margin-top: 6%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.text{
+    font-size: 30px;
+}

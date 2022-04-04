@@ -8,19 +8,15 @@
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/bootstrap/css/bootstrap.css')}}" type="text/css" />
 	<link rel="stylesheet" href="{{url_for('static', filename= 'css/PerStyles.css')}}" type="text/css" />
     <title>{% block title %}{% endblock %}</title>
+
+    {{mymap.js}}
     
 </head>
 
 <body>
-    {% include "includes/navbar.html" %}
-
-    {% if imgback %}
-        {% include "includes/backgroundStyle.html" %}
-    {% endif %}
 
     {% block content %}{% endblock %}
-
-    {% include "includes/footers.html" %}
     
 </body>
+{% include 'includes/footer.html' %}
 </html>
