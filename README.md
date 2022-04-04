@@ -80,3 +80,12 @@ For the MQTT
 * [Instructivo de la api de geolocalizacion](https://developers.google.com/maps/documentation/geolocation/cloud-setup)
 * [Github para instructivo de Wifi Location](https://github.com/gmag11/WifiLocation)
 * [Decodificaion y codificacion de base 64 para Esp32](https://pcbartists.com/firmware/base64-encoding-and-decoding-on-esp32/)
+
+Necesite descargar la biblioteca desde el release de su github e instalarla con el siguiente comando posicionandome sobre la ruta de donde se descrago la biblioteca:
+```
+python -m pip install .\Flask-GoogleMaps-4.1.1.2.tar.gz
+```
+
+El release puede ser encontrado dando clic [aquí](https://github.com/flask-extensions/Flask-GoogleMaps/releases) y usando el más reciente
+
+También a pesar de eso se presentaron unos errores, usar el init del repo dando clic [aquí](https://github.com/flask-extensions/Flask-GoogleMaps/blob/master/flask_googlemaps/__init__.py)
