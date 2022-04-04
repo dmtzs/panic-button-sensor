@@ -28,6 +28,10 @@
 - [Sensor´s and materials list used](#sensors-and-materials-list-used)
 - [Connection diagram](#connection-diagram)
 
+## Description
+A project in which Im going to build a panic button that can send an email or telegram maybe with the location of the one that push the button.
+Another part too with an alcohol sensor that will do the same but this is going to be in the case that you are drunk.
+
 ## Documentation
 I´m developing a github page in the wiki part in order to use that space as a documentation, that documentation is still in development but is going to be there. [Click here]() in order to go to that documentation page.
 <br>
