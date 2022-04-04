@@ -5,7 +5,7 @@
 // Biblioteca que se debe de instalar
 #include <WifiLocation.h>
 
-const char* googleApiKey = "Api key";
+const char* googleApiKey = "Api_key";
 const char* ssid = "...";
 const char* passwd = "...";
 
