@@ -5,9 +5,12 @@
 // Biblioteca que se debe de instalar
 #include <WifiLocation.h>
 
-const char* googleApiKey = "Api_key";
+const char* googleApiKey = "Api key";
 const char* ssid = "...";
 const char* passwd = "...";
+//Debajo para mq3
+#define GAS_SENSOR A0
+int val;
 
 WifiLocation location (googleApiKey);
 
@@ -59,16 +62,18 @@ void getLocation() {
 void setup() {
     Serial.begin(115200);
     connectToWifi();
+    //Debajo de mq3
+    delay(10);
+    pinMode(GAS_SENSOR, INPUT);
 }
 
 void loop() {
     if (Serial.available())
     {
-        String data = Serial.readStringUntil('\n');// En vez de esto será la lectura del sensor y/o push button
-        if(data == "eder") {//Validar el valor del sensor y del push button. Preguntar a David cómo evitar el debounce del push button.
-          Serial.print("Data received: ");
-          Serial.println(data);
-          Serial.println("Showing now data of geolocation:");
+        // String data = Serial.readStringUntil('\n');// En vez de esto será la lectura del sensor y/o push button
+        val=analogRead(GAS_SENSOR);//Lectura sensor mq3 y debajo if de la lectura
+        if(val >= 2000){
+          Serial.println("Alcohol detected, sending geolocation");
           getLocation();
         }
         else {

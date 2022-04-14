@@ -1,5 +1,4 @@
 #define GAS_SENSOR A0
-
 int val;
 
 void setup(){
@@ -10,7 +9,7 @@ void setup(){
 
 void loop(){
   val=analogRead(GAS_SENSOR);
-  if(val >= 1000){
+  if(val >= 2000){
     Serial.println("Nivel de alcohol detectado");
     Serial.print(val);
   }
