@@ -1,3 +1,4 @@
 flask
 gevent
+firebase-admin
 flask-googlemaps
