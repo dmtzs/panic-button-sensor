@@ -25,5 +25,7 @@ def hello_pubsub(event, context):
     product_ref = ref.child("-N017k3urhCwePnWAAjX")
     product_ref.update({})# A dictionary, it could be the json that I think I receive in the message
 
+    # Send the email
+
 # This is the main script that should be in the cloud fucntion with the credentials json file generated
 # For more instruction about this part I need to documentate the steps of the youtube video in the python list fo my profile
