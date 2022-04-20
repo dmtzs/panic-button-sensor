@@ -1,19 +1,14 @@
 try:
-    import os
     from app import app
-    import firebase_admin
+    from firebase_admin import db
     from flask_googlemaps import Map
     from datetime import datetime as dt
-    from firebase_admin import db, credentials
     from flask import render_template, Response, abort
 except ImportError as eImp:
     print(f"The following import ERROR occurred in {__file__}: {eImp}")
 
 # Firebase methods
 def get_coordinates():
-    cred = credentials.Certificate(os.path.realpath("geolocation.json"))# Importante, el archivo debe estar a la misma altura de runApp.py forzosamente y correr el app estando en ese directorio
-    url_database = {"databaseURL": "databaseURL"}#TODO: In prod change this part
-    firebase_admin.initialize_app(cred, url_database)
     ref = db.reference("/Coordinates")
     result = ref.get()
     for key in result.keys():
