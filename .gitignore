@@ -2,6 +2,7 @@
 credentials.txt
 geolocation.json
 tests
+ArduinoOutput
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
