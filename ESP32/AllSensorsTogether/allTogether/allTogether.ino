@@ -4,13 +4,26 @@
 
 // Biblioteca que se debe de instalar
 #include <WifiLocation.h>
+#include <FirebaseESP32.h>
 
-const char* googleApiKey = "Api key";
-const char* ssid = "...";
-const char* passwd = "...";
+// const char* googleApiKey = "Api key";
+// const char* ssid = "...";
+// const char* passwd = "...";
+#define googleApiKey "AIzaSyA6TDHaUUCPJ0qn0TwB8If3HNsOKh-sPDU"
+#define ssid "Asus 2.4"
+#define passwd "M_on_ky_3"
+
+#define FIREBASE_HOST "https://geolocation-346122-default-rtdb.firebaseio.com/"
+#define FIREBASE_Authorization_key "W26buUb20gAqTTzyex8MasvrmUa87zK7T4FRn2z0"
+
 //Debajo para mq3
 #define GAS_SENSOR A0
-int val;
+int val, control_request=0;
+String lat, lng;
+
+//Firebase objetos
+FirebaseData firebaseData;
+FirebaseJson json;
 
 WifiLocation location (googleApiKey);
 
@@ -57,6 +70,8 @@ void getLocation() {
   Serial.println ("Location: " + String (loc.lat, 7) + "," + String (loc.lon, 7));
   Serial.println ("Accuracy: " + String (loc.accuracy));
   Serial.println ("Result: " + location.wlStatusStr (location.getStatus ()));
+  lat = String (loc.lat, 7);
+  lng = String (loc.lon, 7);
 }
 
 void setup() {
@@ -68,17 +83,20 @@ void setup() {
 }
 
 void loop() {
-    if (Serial.available())
-    {
-        // String data = Serial.readStringUntil('\n');// En vez de esto será la lectura del sensor y/o push button
-        val=analogRead(GAS_SENSOR);//Lectura sensor mq3 y debajo if de la lectura
-        if(val >= 2000){
-          Serial.println("Alcohol detected, sending geolocation");
-          getLocation();
-        }
-        else {
-          Serial.println("No data received");
-        }
+    // String data = Serial.readStringUntil('\n');// En vez de esto será la lectura del sensor y/o push button
+    val=analogRead(GAS_SENSOR);//Lectura sensor mq3 y debajo if de la lectura
+    Serial.println(val);
+    if(val >= 1200 && control_request == 0){
+      Serial.println("Alcohol detected, sending geolocation");
+      control_request=1;
+      getLocation();
+      Firebase.begin(FIREBASE_HOST,FIREBASE_Authorization_key);
+      Firebase.setDouble(firebaseData, "/Coordinates/-N017k3urhCwePnWAAjX/latitude", lat.toFloat());
+      Firebase.setDouble(firebaseData, "/Coordinates/-N017k3urhCwePnWAAjX/longitude", lng.toFloat());
+    }
+    else {
+      control_request=0;
+      Serial.println("No data received");
     }
     delay(1000);
 }
