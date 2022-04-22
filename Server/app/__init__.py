@@ -10,7 +10,7 @@ except ImportError as eImp:
 app= Flask(__name__)
 
 cred = credentials.Certificate(os.path.realpath("geolocation.json"))# Importante, el archivo debe estar a la misma altura de runApp.py forzosamente y correr el app estando en ese directorio
-url_database = {"databaseURL": "databaseURL"}#TODO: In prod change this part
+url_database = {"databaseURL": "databaseURL"}
 firebase_admin.initialize_app(cred, url_database)
 
 app.config['GOOGLEMAPS_KEY'] = "yourApiKey"# Se supone es la misma clave de API que me dan y que uso en el ESP32
