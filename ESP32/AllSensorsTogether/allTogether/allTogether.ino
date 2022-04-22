@@ -6,15 +6,12 @@
 #include <WifiLocation.h>
 #include <FirebaseESP32.h>
 
-// const char* googleApiKey = "Api key";
-// const char* ssid = "...";
-// const char* passwd = "...";
-#define googleApiKey "AIzaSyA6TDHaUUCPJ0qn0TwB8If3HNsOKh-sPDU"
-#define ssid "Asus 2.4"
-#define passwd "M_on_ky_3"
+#define googleApiKey "googleApiKey"
+#define ssid "ssid"
+#define passwd "passwd"
 
-#define FIREBASE_HOST "https://geolocation-346122-default-rtdb.firebaseio.com/"
-#define FIREBASE_Authorization_key "W26buUb20gAqTTzyex8MasvrmUa87zK7T4FRn2z0"
+#define FIREBASE_HOST "firebaseURL"
+#define FIREBASE_Authorization_key "Firebase_authKey"
 
 //Debajo para mq3
 #define GAS_SENSOR A0
