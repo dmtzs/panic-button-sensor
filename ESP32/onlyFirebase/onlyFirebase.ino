@@ -2,9 +2,9 @@
 #include  <WiFi.h>
 
 #define FIREBASE_HOST "https://geolocation-346122-default-rtdb.firebaseio.com/"
-#define WIFI_SSID "Asus 2.4" // Change the name of your WIFI
-#define WIFI_PASSWORD "M_on_ky_3" // Change the password of your WIFI
-#define FIREBASE_Authorization_key "W26buUb20gAqTTzyex8MasvrmUa87zK7T4FRn2z0"
+#define WIFI_SSID "ssid" // Change the name of your WIFI
+#define WIFI_PASSWORD "passwd" // Change the password of your WIFI
+#define FIREBASE_Authorization_key "firebase_apiKey"
 
 FirebaseData firebaseData;
 FirebaseJson json;

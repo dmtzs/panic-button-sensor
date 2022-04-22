@@ -1,8 +1,8 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
   
-#define ssid "Asus 2.4"
-#define passwd "M_on_ky_3"
+#define ssid "ssid"
+#define passwd "passwd"
   
 void setup() {
   
