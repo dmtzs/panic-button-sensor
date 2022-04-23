@@ -21,6 +21,13 @@ def get_coordinates():
     print(result[result_key])
     return result[result_key]# Returns dicctionary {'latitude': 19.362534, 'longitude': -99.249061}
 
+def get_5_coordinates():
+    # TODO: Create this method in which Im gone to request last 5 registers registered in the firebase data base.
+    ref = db.reference("/Coordinates")
+    result = ref.order_by_value().limit_to_last(5).get()#Checar si este query funciona
+
+    return result
+
 # Method to send email
 def email_send(destiny_email):
     #send email 
@@ -59,7 +66,7 @@ def my_map():
         lat=coordinates["latitude"],
         lng=coordinates["longitude"],
         zoom=19,
-        markers=[(coordinates["latitude"], coordinates["longitude"])])
+        markers=[(coordinates["latitude"], coordinates["longitude"])])#TODO: Check how to add more than one marker.
 
         return render_template("googlemap.html", pageTitle= "Map", mymap=mymap)
     except Exception:
@@ -67,7 +74,19 @@ def my_map():
 
 @app.route("/lastlocations", methods=["GET"])# Mapa de google maps para las coordenadas
 def map_with_last_locations():
-    pass
+    try:
+        coordinates = get_5_coordinates()
+        mymap = Map(identifier="view-center",
+        varname="mymap",
+        style="height:1520px;width:1900px;margin:0;",
+        lat=coordinates["latitude"],
+        lng=coordinates["longitude"],
+        zoom=19,
+        markers=[(coordinates["latitude"], coordinates["longitude"])])
+
+        return render_template("googlemap.html", pageTitle= "Map", mymap=mymap)
+    except Exception:
+        abort(500)
 
 @app.route("/sendemail", methods=["POST"])# Endpoint para mandar el correo que se llamará desde otro lado
 def send_email():
@@ -85,6 +104,28 @@ def send_email():
         respJSON = {
             "responseCode": respCode,
             "responseMessage": str(ex)
+        }
+        respJSON = json.dumps(respJSON)
+
+    return Response(respJSON, mimetype="application/json")
+
+@app.route("/testMethods", methods=["POST"])
+def tests_methods():
+    try:
+        coordinates = get_5_coordinates()
+        respCode = 200
+        respJSON = {
+            "responseCode": respCode,
+            "responseMessage": "Query done",
+            "queryResult": coordinates
+        }
+        respJSON = json.dumps(respJSON)
+    except Exception as ex:
+        respCode = 200
+        respJSON = {
+            "responseCode": respCode,
+            "responseMessage": str(ex),
+            "queryResult": "Query not done"
         }
         respJSON = json.dumps(respJSON)
 
