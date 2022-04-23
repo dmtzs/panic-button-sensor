@@ -65,6 +65,10 @@ def my_map():
     except Exception:
         abort(500)
 
+@app.route("/lastlocations", methods=["GET"])# Mapa de google maps para las coordenadas
+def map_with_last_locations():
+    pass
+
 @app.route("/sendemail", methods=["POST"])# Endpoint para mandar el correo que se llamará desde otro lado
 def send_email():
     try:
