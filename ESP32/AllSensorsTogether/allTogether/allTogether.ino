@@ -46,10 +46,6 @@ void setClock () {
         now = time (nullptr);
     }
     struct tm timeinfo;
-    struct tm timeinfo2;//temporal
-    localtime_r(&now, &timeinfo2);
-    Serial.println("Other time stamp");
-    Serial.print (asctime (&timeinfo2));
     gmtime_r (&now, &timeinfo);
     Serial.print ("\n");
     Serial.print ("Current time: ");
