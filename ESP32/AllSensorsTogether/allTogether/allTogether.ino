@@ -118,8 +118,8 @@ void loop() {
       control_request=1;
       getLocation();
       FirebaseJson json_value;// A variable to set the key and content I want
-      json_value.set("latitude", lat.toFloat());
-      json_value.set("longitude", lng.toFloat());
+      json_value.set("lat", lat.toFloat());
+      json_value.set("lng", lng.toFloat());
 
       Firebase.pushJSON(firebaseData, "/Coordinates/ESP_" + ESP_serie + "/lectura", json_value);
     }
@@ -128,8 +128,8 @@ void loop() {
       control_request=1;
       getLocation();
       FirebaseJson json_value;// A variable to set the key and content I want
-      json_value.set("latitude", lat.toFloat());
-      json_value.set("longitude", lng.toFloat());
+      json_value.set("lat", lat.toFloat());
+      json_value.set("lng", lng.toFloat());
 
       Firebase.pushJSON(firebaseData, "/Coordinates/ESP_" + ESP_serie + "/lectura", json_value);
     }
