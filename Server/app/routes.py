@@ -93,7 +93,7 @@ def map_with_last_locations():
     except Exception:
         abort(500)
 
-@app.route("/sendemail", methods=["POST"])# Endpoint para mandar el correo que se llamará desde otro lado
+@app.route("/sendemail", methods=["POST"])# Endpoint to send an email
 def send_email():
     try:
         coordinates = get_coordinates()
