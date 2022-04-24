@@ -82,7 +82,8 @@ def map_with_last_locations():
         lat=coordinates["latitude"],
         lng=coordinates["longitude"],
         zoom=19,
-        markers=[(coordinates["latitude"], coordinates["longitude"])])
+        markers=[coordinates])
+        # markers=[(coordinates["latitude"], coordinates["longitude"])])
 
         return render_template("googlemap.html", pageTitle= "Map", mymap=mymap)
     except Exception:
