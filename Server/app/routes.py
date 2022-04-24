@@ -13,20 +13,25 @@ except ImportError as eImp:
 
 # Firebase methods
 def get_coordinates():
-    ref = db.reference("/Coordinates")
-    result = ref.get()
+    ref = db.reference("/Coordinates/ESP_40:91:51:99:44:90/lectura")
+    result = ref.order_by_key().limit_to_last(1).get()
+    result = dict(result)
     for key in result.keys():
         result_key = key
 
-    print(result[result_key])
-    return result[result_key]# Returns dicctionary {'latitude': 19.362534, 'longitude': -99.249061}
+    # print(result[result_key])
+    return result[result_key]# Returns dicctionary {'lat': 19.362534, 'lng': -99.249061}
 
 def get_5_coordinates():
-    # TODO: Create this method in which Im gone to request last 5 registers registered in the firebase data base.
-    ref = db.reference("/Coordinates")
-    result = ref.order_by_value().limit_to_last(5).get()#Checar si este query funciona
+    ref = db.reference("/Coordinates/ESP_40:91:51:99:44:90/lectura")
+    result = ref.order_by_key().limit_to_last(5).get()
+    result = dict(result)
+    
+    results = []
+    for key in result.keys():
+        results.append(result[key])
 
-    return result
+    return results# Returns array of dictionaries: [{'lat': 19.36105, 'lng': -99.25164}, {'lat': 19.36148, 'lng': -99.25091}, {'lat': 19.36201, 'lng': -99.24981}, {'lat': 19.36235, 'lng': -99.24932}, {'lat': 19.36266, 'lng': -99.24928}]
 
 # Method to send email
 def email_send(destiny_email):
@@ -56,34 +61,33 @@ def dateNow():
     }
 
 # -------------Endpoints-------------
-@app.route("/", methods=["GET"])# Mapa de google maps para las coordenadas
+@app.route("/", methods=["GET"])# Map of google maps to show coordinates
 def my_map():
     try:
         coordinates = get_coordinates()
         mymap = Map(identifier="view-center",
         varname="mymap",
         style="height:1520px;width:1900px;margin:0;",
-        lat=coordinates["latitude"],
-        lng=coordinates["longitude"],
+        lat=coordinates["lat"],
+        lng=coordinates["lng"],
         zoom=19,
-        markers=[(coordinates["latitude"], coordinates["longitude"])])#TODO: Check how to add more than one marker.
+        markers=[(coordinates["lat"], coordinates["lng"])])
 
         return render_template("googlemap.html", pageTitle= "Map", mymap=mymap)
     except Exception:
         abort(500)
 
-@app.route("/lastlocations", methods=["GET"])# Mapa de google maps para las coordenadas
+@app.route("/lastlocations", methods=["GET"])# Map of google maps to show last 5 coordinates
 def map_with_last_locations():
     try:
         coordinates = get_5_coordinates()
         mymap = Map(identifier="view-center",
         varname="mymap",
         style="height:1520px;width:1900px;margin:0;",
-        lat=coordinates["latitude"],
-        lng=coordinates["longitude"],
-        zoom=19,
-        markers=[coordinates])
-        # markers=[(coordinates["latitude"], coordinates["longitude"])])
+        lat=coordinates[4]["lat"],
+        lng=coordinates[4]["lng"],
+        zoom=18,
+        markers=coordinates)
 
         return render_template("googlemap.html", pageTitle= "Map", mymap=mymap)
     except Exception:
