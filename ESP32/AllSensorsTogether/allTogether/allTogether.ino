@@ -1,6 +1,7 @@
 // Native libraries
-#include <Arduino.h>
 #include <WiFi.h>
+#include <Arduino.h>
+#include <HTTPClient.h>
 
 // Libraries that should be installed
 #include <WifiLocation.h>
@@ -82,6 +83,26 @@ void getLocation() {
   lng = String (loc.lon, 7);
 }
 
+void email_endpoint() {
+  HTTPClient http;
+  http.begin("sendEmailEndpoint");  //Specify destination for HTTP request
+  http.addHeader("Content-Type", "text/plain");             //Specify content-type header
+  int httpResponseCode = http.POST("POSTING from ESP32");   //Send the actual POST request
+
+  if(httpResponseCode>0) {
+    String response = http.getString();                       //Get the response to the request
+    
+    Serial.println(httpResponseCode);   //Print return code
+    Serial.println(response);           //Print request answer
+  
+  }else{
+    Serial.print("Error on sending POST: ");
+    Serial.println(httpResponseCode);
+  }
+  
+  http.end();  //Free resources
+}
+
 void setup() {
     Serial.begin(115200);
     connectToWifi();
@@ -122,6 +143,7 @@ void loop() {
       json_value.set("lng", lng.toFloat());
 
       Firebase.pushJSON(firebaseData, "/Coordinates/ESP_" + ESP_serie + "/lectura", json_value);
+      email_endpoint();
     }
     else if(pushPanicState == HIGH && control_request == 0) {
       Serial.println("Panic button detected");
@@ -132,6 +154,7 @@ void loop() {
       json_value.set("lng", lng.toFloat());
 
       Firebase.pushJSON(firebaseData, "/Coordinates/ESP_" + ESP_serie + "/lectura", json_value);
+      email_endpoint();
     }
     else if(pushLedAlarmState == HIGH && control_alarm_led == 0) {
       Serial.println("Encender alarma");
