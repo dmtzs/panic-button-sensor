@@ -20,7 +20,17 @@ def get_coordinates():
         result_key = key
 
     # print(result[result_key])
-    return result[result_key]# Returns dicctionary {'lat': 19.362534, 'lng': -99.249061}
+    return result[result_key]
+
+def get_email():
+    ref = db.reference("/Coordinates/ESP_40:91:51:99:44:90")
+    result = ref.order_by_key().limit_to_first(1).get()
+    result = dict(result)
+    for key in result.keys():
+        result_key = key
+
+    # print(result[result_key])
+    return result[result_key]
 
 def get_5_coordinates():
     ref = db.reference("/Coordinates/ESP_40:91:51:99:44:90/lectura")
@@ -31,7 +41,7 @@ def get_5_coordinates():
     for key in result.keys():
         results.append(result[key])
 
-    return results# Returns array of dictionaries: [{'lat': 19.36105, 'lng': -99.25164}, {'lat': 19.36148, 'lng': -99.25091}, {'lat': 19.36201, 'lng': -99.24981}, {'lat': 19.36235, 'lng': -99.24932}, {'lat': 19.36266, 'lng': -99.24928}]
+    return results
 
 # Method to send email
 def email_send(destiny_email):
@@ -96,8 +106,8 @@ def map_with_last_locations():
 @app.route("/sendemail", methods=["POST"])# Endpoint to send an email
 def send_email():
     try:
-        coordinates = get_coordinates()
-        email_send(coordinates["email-dest"])
+        email_from = get_email()
+        email_send(email_from)
         respCode = 200
         respJSON = {
             "responseCode": respCode,
