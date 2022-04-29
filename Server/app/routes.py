@@ -19,7 +19,6 @@ def get_coordinates():
     for key in result.keys():
         result_key = key
 
-    # print(result[result_key])
     return result[result_key]
 
 def get_email():
@@ -63,6 +62,28 @@ def email_send(destiny_email):
     server.quit()
     print("Successfully sent mail ")
 
+# Method to update the google map
+def create_map_instance(coordinates):
+    mymap = Map(identifier="view-center",
+    varname="mymap",
+    style="height:1520px;width:1900px;margin:0;",
+    lat=coordinates["lat"],
+    lng=coordinates["lng"],
+    zoom=19,
+    markers=[(coordinates["lat"], coordinates["lng"])])
+
+    return mymap
+
+def update_map(map_to_use):#TODO: In local tests test if we can delete some code like only putting the get coordinates method inside the if and the rest outside the if`s`
+    if map_to_use == "one":
+        coordinates = get_coordinates()
+        mymap = create_map_instance(coordinates)
+        return mymap, coordinates
+    else:
+        coordinates = get_5_coordinates()
+        mymap = create_map_instance(coordinates)
+        return mymap, coordinates
+
 # -------------Context processor-------------
 @app.context_processor
 def dateNow():
@@ -73,24 +94,25 @@ def dateNow():
 # -------------Endpoints-------------
 @app.route("/", methods=["GET"])# Map of google maps to show coordinates
 def my_map():
-    try:
-        coordinates = get_coordinates()
-        mymap = Map(identifier="view-center",
-        varname="mymap",
-        style="height:1520px;width:1900px;margin:0;",
-        lat=coordinates["lat"],
-        lng=coordinates["lng"],
-        zoom=19,
-        markers=[(coordinates["lat"], coordinates["lng"])])
+    # try:
+    coordinates = get_coordinates()
+    mymap = Map(identifier="view-center",
+    varname="mymap",
+    style="height:1520px;width:1900px;margin:0;",
+    lat=coordinates["lat"],
+    lng=coordinates["lng"],
+    zoom=19,
+    markers=[(coordinates["lat"], coordinates["lng"])])
 
-        return render_template("googlemap.html", pageTitle= "Map", mymap=mymap)
-    except Exception:
-        abort(500)
+    return render_template("googlemap.html", pageTitle= "Map", mymap=mymap)
+    # except Exception:
+    #     abort(500)
 
 @app.route("/lastlocations", methods=["GET"])# Map of google maps to show last 5 coordinates
 def map_with_last_locations():
     try:
         coordinates = get_5_coordinates()
+        # mymap = update_map("two")# TODO: Test this in locala after index tested
         mymap = Map(identifier="view-center",
         varname="mymap",
         style="height:1520px;width:1900px;margin:0;",
